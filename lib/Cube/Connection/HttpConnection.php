@@ -43,4 +43,16 @@ class HttpConnection extends \Cube\Connection\Connection {
         $res = \Httpful\Request::get($url)->expectsJson()->send();
         return $res;
     }
+
+    public function eventPut($args) {
+        $json = json_encode($args);
+        $res = $this->post($this->uri . '1.0/event/put', $json);
+        return $res->body;
+    }
+
+    public function post($url, $args)
+    {
+        $res = \Httpful\Request::post($url, $args)->expectsJson()->send();
+        return $res;
+    }
 }
